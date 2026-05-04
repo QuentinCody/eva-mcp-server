@@ -38,8 +38,20 @@ console.log(`${BLUE}🧪 EVA Structured Content Regression Tests${RESET}`);
 
 const toolExpectations = [
   {
-    path: 'src/tools/search.ts',
-    required: ['createCodeModeResponse', 'createCodeModeError'],
+    path: 'src/tools/code-mode.ts',
+    required: ['createSearchTool', 'createExecuteTool', 'evaCatalog'],
+  },
+  {
+    path: 'src/tools/query-data.ts',
+    required: ['createQueryDataHandler', 'eva_query_data', 'EVA_DATA_DO'],
+  },
+  {
+    path: 'src/tools/get-schema.ts',
+    required: ['createGetSchemaHandler', 'eva_get_schema', 'EVA_DATA_DO'],
+  },
+  {
+    path: 'src/spec/catalog.ts',
+    required: ['evaCatalog', 'ebi.ac.uk/eva/webservices/rest/v1'],
   },
 ];
 
