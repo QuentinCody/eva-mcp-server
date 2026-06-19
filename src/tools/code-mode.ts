@@ -20,6 +20,8 @@ export function registerCodeMode(server: McpServer, env: CodeModeEnv): void {
 
     const executeTool = createExecuteTool({
         prefix: "eva",
+        // Verifiable provenance: eva_execute results carry a _meta.citation.
+        source: { id: "eva", name: "European Variation Archive", url: "https://www.ebi.ac.uk/eva" },
         catalog: evaCatalog,
         apiFetch,
         doNamespace: env.EVA_DATA_DO,
