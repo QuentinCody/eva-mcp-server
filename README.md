@@ -2,7 +2,7 @@
 
 MCP server wrapping the [European Variation Archive (EVA) REST API](https://www.ebi.ac.uk/eva/?Help#REST%20Web%20Services) — EMBL-EBI's open archive for all types of genetic variation data across species.
 
-Runs on Cloudflare Workers. Exposes four Code Mode tools (`eva_search`, `eva_execute`, `eva_query_data`, `eva_get_schema`) plus a convenience `eva_variant_lookup`.
+Runs on Cloudflare Workers. Exposes four Code Mode tools: `eva_search`, `eva_execute`, `eva_query_data`, `eva_get_schema`.
 
 - Upstream docs: https://www.ebi.ac.uk/eva/?Help
 - Base URL: `https://www.ebi.ac.uk/eva/webservices/rest/v1`
