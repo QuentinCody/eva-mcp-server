@@ -1,6 +1,7 @@
 import type { McpServer } from "@bio-mcp/shared/mcp";
 import { z } from "zod";
 import { createQueryDataHandler } from "@bio-mcp/shared/staging/utils";
+import { evaResponse } from "../lib/tool-result";
 
 interface QueryEnv {
     EVA_DATA_DO?: unknown;
@@ -9,8 +10,8 @@ interface QueryEnv {
 export function registerQueryData(server: McpServer, env?: QueryEnv): void {
     const handler = createQueryDataHandler("EVA_DATA_DO", "eva");
 
-    server.registerTool(
-        "eva_query_data",
+    for (const name of ["eva_query_data", "mcp_eva_query_data"]) server.registerTool(
+        name,
         {
             title: "Query Staged EVA Data",
             description:
@@ -23,14 +24,13 @@ export function registerQueryData(server: McpServer, env?: QueryEnv): void {
                     .int()
                     .positive()
                     .max(10000)
-                    .default(100)
                     .optional()
                     .describe("Maximum number of rows to return (default: 100)"),
             },
         },
         async (args, extra) => {
             const runtimeEnv = env || (extra as { env?: QueryEnv })?.env || {};
-            return handler(args as Record<string, unknown>, runtimeEnv as Record<string, unknown>);
+            return evaResponse(() => handler(args as Record<string, unknown>, runtimeEnv as Record<string, unknown>), runtimeEnv, name, extra, args);
         },
     );
 }
